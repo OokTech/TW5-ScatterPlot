@@ -1,0 +1,294 @@
+title: $:/plugins/OokTech/ScatterPlot/Scatter Plot Creator
+
+\define thisInnerShowCode() <$~ScatterPlot
+
+\define thisShowCode()
+<pre>
+<<thisInnerShowCode>>
+    data=<$text text='"""'/>{{$:/temp/InteractiveDemo!!data}}<$text text='"""'/>
+    mode=<$text text='"'/>{{$:/temp/InteractiveDemo!!mode}}<$text text='"'/>
+    class=<$text text='"'/>{{$:/temp/InteractiveDemo!!class}}<$text text='"'/>
+    width=<$text text='"'/>{{$:/temp/InteractiveDemo!!width}}<$text text='"'/>
+    width-unit=<$text text='"'/>{{$:/temp/InteractiveDemo!!width-unit}}<$text text='"'/>
+    height=<$text text='"'/>{{$:/temp/InteractiveDemo!!height}}<$text text='"'/>
+    height-unit=<$text text='"'/>{{$:/temp/InteractiveDemo!!height-unit}}<$text text='"'/>
+    stroke=<$text text='"'/>{{$:/temp/InteractiveDemo!!stroke}}<$text text='"'/>
+    strokeWidth=<$text text='"'/>{{$:/temp/InteractiveDemo!!strokeWidth}}<$text text='"'/>
+    fill=<$text text='"'/>{{$:/temp/InteractiveDemo!!fill}}<$text text='"'/>
+    symbol=<$text text='"'/>{{$:/temp/InteractiveDemo!!symbol}}<$text text='"'/>
+    radius=<$text text='"'/>{{$:/temp/InteractiveDemo!!radius}}<$text text='"'/>
+/>
+</pre>
+\end
+
+This is both a demo of the sort of charts you can make using this plugin and a tool for creating charts without having to remember the syntax. Just select the options you want below and then copy the code into a tiddler where you want the chart.
+
+<$button>
+Load Test Data 1 (points)
+<$action-setfield $tiddler='$:/temp/InteractiveDemo' data="50,100 10,80 20,40 30,90 40,150 50,200 90,30 60,180 110,30 120,10 150,50 30,170 140,90 150,140"/>
+</$button>
+
+<$button>
+Load Test Data 2 (sequence)
+<$action-setfield $tiddler='$:/temp/InteractiveDemo' data="50 10 20 90 40 50 90 60 110 120 50 170 90 150"/>
+</$button>
+
+<table style='width:100%'>
+    <tr>
+        <th>
+            data
+        </th>
+        <td
+            colspan=3
+        >
+            <$edit-text
+                tiddler='$:/temp/InteractiveDemo'
+                field='data'
+                class='tc-edit-texteditor'
+            />
+        </td>
+    </tr>
+    <tr>
+        <th>
+            mode
+        </th>
+        <td>
+            <$radio
+                tiddler='$:/temp/InteractiveDemo'
+                field='mode'
+                value='scatter'
+            >
+                scatter
+            </$radio>
+        </td>
+        <td>
+            <$radio
+                tiddler='$:/temp/InteractiveDemo'
+                field='mode'
+                value='line'
+            >
+                line
+            </$radio>
+        </td>
+        <td>
+            <$radio
+                tiddler='$:/temp/InteractiveDemo'
+                field='mode'
+                value='whisker'
+            >
+                whisker
+            </$radio>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            width
+        </th>
+        <td
+            colspan=2
+        >
+            <$edit-text
+                tiddler='$:/temp/InteractiveDemo'
+                field='width'
+                class='tc-edit-texteditor'
+            />
+        </td>
+        <td>
+            <$select
+                tiddler='$:/temp/InteractiveDemo'
+                field='width-unit'
+            >
+                <$list
+                    filter='% em px ex cm mm in pt pc ch rem vw vh vmin vmax'
+                >
+                    <option>
+                        <<currentTiddler>>
+                    </option>
+                </$list>
+            </$select>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            height
+        </th>
+        <td
+            colspan=2
+        >
+            <$edit-text
+                tiddler='$:/temp/InteractiveDemo'
+                field='height'
+                class='tc-edit-texteditor'
+            />
+        </td>
+        <td>
+            <$select
+                tiddler='$:/temp/InteractiveDemo'
+                field='height-unit'
+            >
+                <$list
+                    filter='% em px ex cm mm in pt pc ch rem vw vh vmin vmax'
+                >
+                    <option>
+                        <<currentTiddler>>
+                    </option>
+                </$list>
+            </$select>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            class
+        </th>
+        <td
+            colspan=3
+        >
+            <$select
+                tiddler='$:/temp/InteractiveDemo'
+                field='class'
+            >
+                <option
+                    value=''
+                >
+                    //Default//
+                </option>
+                <$list
+                    filter=''
+                >
+                    <option>
+                        <<currentTiddler>>
+                    </option>
+                </$list>
+            </$select>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            stroke (color)
+        </th>
+        <td>
+            <$edit-text
+                tiddler='$:/temp/InteractiveDemo'
+                field='stroke'
+                class='tc-edit-texteditor'
+            />
+        </td>
+        <th>
+            strokeWidth
+        </th>
+        <td>
+            <$edit-text
+                tiddler='$:/temp/InteractiveDemo'
+                field='strokeWidth'
+                class='tc-edit-texteditor'
+            />
+        </td>
+    </tr>
+    <tr>
+        <th>
+            fill
+        </th>
+        <td>
+            <$edit-text
+                tiddler='$:/temp/InteractiveDemo'
+                field='fill'
+                class='tc-edit-texteditor'
+            />
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            symbol
+        </th>
+        <td>
+            <$select
+                tiddler='$:/temp/InteractiveDemo'
+                field='symbol'
+            >
+                <option
+                    value=''
+                >
+                    //Default//
+                </option>
+                <option
+                    value='o'
+                >
+                    o (circle)
+                </option>
+                <!--
+                <option
+                    value='s'
+                >
+                    s (square)
+                </option>
+                -->
+            </$select>
+        </td>
+        <th>
+            radius
+        </th>
+        <td>
+            <$edit-text
+                tiddler='$:/temp/InteractiveDemo'
+                field='radius'
+                class='tc-edit-texteditor'
+            />
+        </td>
+    </tr>
+    <tr>
+        <th>
+            scale
+        </th>
+        <td>
+            <$radio
+                tiddler='$:/temp/InteractiveDemo'
+                field='scale'
+                value=none
+            >
+                none
+            </$radio>
+        </td>
+        <td>
+            <$radio
+                tiddler='$:/temp/InteractiveDemo'
+                field='scale'
+                value=auto
+            >
+                auto
+            </$radio>
+        </td>
+        <td>
+            <$radio
+                tiddler='$:/temp/InteractiveDemo'
+                field='scale'
+                value=size
+            >
+                size
+            </$radio>
+        </td>
+    </tr>
+</table>
+
+<$ScatterPlot
+    data={{$:/temp/InteractiveDemo!!data}}
+    mode={{$:/temp/InteractiveDemo!!mode}}
+    class={{$:/temp/InteractiveDemo!!class}}
+    width={{$:/temp/InteractiveDemo!!width}}
+    width-unit={{$:/temp/InteractiveDemo!!width-unit}}
+    height={{$:/temp/InteractiveDemo!!height}}
+    height-unit={{$:/temp/InteractiveDemo!!height-unit}}
+    stroke={{$:/temp/InteractiveDemo!!stroke}}
+    strokeWidth={{$:/temp/InteractiveDemo!!strokeWidth}}
+    fill={{$:/temp/InteractiveDemo!!fill}}
+    symbol={{$:/temp/InteractiveDemo!!symbol}}
+    radius={{$:/temp/InteractiveDemo!!radius}}
+    scale={{$:/temp/InteractiveDemo!!scale}}
+/>
+
+Code:
+
+<<thisShowCode>>
